@@ -135,7 +135,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <div class="page-header">
-                    <h2>Mettre à jour l'enregistrement</h2>
+                    <h2>Mettre à jour enregistrement</h2>
                 </div>
                 <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 

@@ -107,7 +107,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <div class="page-header">
-                    <h2>Mise à jours une actualités</h2>
+                    <h2>Mise à jour d'une actualitée</h2>
                 </div>
                 <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 
@@ -123,13 +123,13 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                     </div>
                     <div class="form-group">
                         <label>date</label>
-                        <input type="text" name="date" class="form-control" value="<?php echo $date; ?>">
+                        <input type="date" name="date" class="form-control" value="<?php echo $date; ?>">
                         <span class="form-text"><?php echo $date_err; ?></span>
                     </div>
 
                     <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                    <input type="submit" class="btn btn-primary" value="Submit">
-                    <a href="actualite-index.php" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" class="btn btn-primary" value="Envoyer">
+                    <a href="actualite-index.php" class="btn btn-secondary">annuler</a>
                 </form>
             </div>
         </div>

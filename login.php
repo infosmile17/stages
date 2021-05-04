@@ -39,6 +39,9 @@ session_start();
                     if (mysqli_stmt_execute($stmt)) {
                         $result = mysqli_stmt_get_result($stmt);
 
+                        // var_dump($result);
+                        // die;
+
                         if (mysqli_num_rows($result) == 1) {
                             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                             $_SESSION['users'] = $row;
@@ -68,8 +71,14 @@ session_start();
                             <img src="images/stage_transparent.jpg" class="brand_logo" alt="Logo">
                         </div>
                     </div>
+
                     <div class="d-flex justify-content-center form_container">
                         <form action="login.php" method="POST">
+                            <?php if (isset($_GET['msg'])) { ?>
+                                <p style="color: whitesmoke;"><?php echo $_GET['msg']; ?></p>
+
+                            <?php } ?>
+
                             <div class="input-group mb-3">
                                 <div class="input-group-append">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -85,7 +94,12 @@ session_start();
                             <div class="d-flex justify-content-center mt-3 login_container">
                                 <input type="submit" name="connexion" class="btn login_btn" value="Connexion">
                             </div>
+                            <div class="d-flex justify-content-center mt-3 login_container">
+                                <a style="color: white;" href="inscription.php">inscrivez-vous</a>
+                            </div>
                         </form>
+
+
                     </div>
 
                     <div class="mt-4">

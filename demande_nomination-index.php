@@ -118,9 +118,9 @@ include_once('navbar.php');
                             echo "<td>" . $row['date_reponse'] . "</td>";
                             echo "<td>" . $row['etat'] . "</td>";
                             echo "<td>";
-                            echo "<a href='demande_nomination-read.php?id=" . $row['id'] . "' title='View Record' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                            echo "<a href='demande_nomination-update.php?id=" . $row['id'] . "' title='Update Record' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                            echo "<a href='demande_nomination-delete.php?id=" . $row['id'] . "' title='Delete Record' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                            echo "<a href='demande_nomination-read.php?id=" . $row['id'] . "' title='Afficher enregistrement' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
+                            echo "<a href='demande_nomination-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                            echo "<a href='demande_nomination-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
                             echo "</td>";
                             echo "</tr>";
                         }

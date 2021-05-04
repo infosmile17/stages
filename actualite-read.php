@@ -54,27 +54,55 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
 <section class="pt-5">
     <div class="container-fluid">
         <div class="row">
+            <div class="col-md-2 mx-auto"></div>
             <div class="col-md-8 mx-auto">
                 <div class="page-header">
                     <h1>Détails actualitée</h1>
                 </div>
+                <div class="card">
+                    <div class="header">
+                        <h1><?php echo $row["titre"]; ?></h1>
+                    </div>
 
-                <div class="form-group">
-                    <label>Titre</label>
-                    <p class="form-control-static"><?php echo $row["titre"]; ?></p>
+                    <div class="description">
+                        <p><?php echo $row["description"]; ?></p>
+                    </div>
+                    <div class="footer">
+                        <?php echo $row["date"]; ?>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <p class="form-control-static"><?php echo $row["description"]; ?></p>
-                </div>
-                <div class="form-group">
-                    <label>Date</label>
-                    <p class="form-control-static"><?php echo $row["date"]; ?></p>
-                </div>
-
+                <br>
                 <p><a href="actualite-index.php" class="btn btn-primary">Listes des actualités</a></p>
             </div>
         </div>
     </div>
 </section>
+<style>
+    .card {
+        width: 250px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        text-align: center;
+        width: 100%;
+    }
+
+    .card .header {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        font-size: 40px;
+
+    }
+
+    .card .footer {
+        background-color: #4CAF50;
+        color: white;
+        padding: 3px;
+        font-size: 22px;
+    }
+
+    .card .description {
+        padding: 10px;
+        font-size: 22px;
+    }
+</style>
 <?php include_once('footer.php'); ?>

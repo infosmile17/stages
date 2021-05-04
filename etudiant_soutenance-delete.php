@@ -49,7 +49,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>View Record</title>
+    <title>Afficher enregistrement</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
@@ -59,7 +59,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
             <div class="row">
                 <div class="col-md-6 mx-auto">
                     <div class="page-header">
-                        <h1>Delete Record</h1>
+                        <h1>Supprimer enregistrement</h1>
                     </div>
                     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                         <div class="alert alert-danger fade-in">

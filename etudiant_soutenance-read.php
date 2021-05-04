@@ -54,7 +54,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>View Record</title>
+    <title>Afficher enregistrement</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
@@ -64,7 +64,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
             <div class="row">
                 <div class="col-md-8 mx-auto">
                     <div class="page-header">
-                        <h1>View Record</h1>
+                        <h1>Afficher enregistrement</h1>
                     </div>
 
                     <div class="form-group">

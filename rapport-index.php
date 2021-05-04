@@ -116,9 +116,9 @@ include_once('navbar.php');
                             echo "<td>" . $row['nom_pdf'] . "</td>";
                             echo "<td>" . $row['date'] . "</td>";
                             echo "<td>";
-                            echo "<a href='rapport-read.php?id=" . $row['id'] . "' title='View Record' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                            echo "<a href='rapport-update.php?id=" . $row['id'] . "' title='Update Record' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                            echo "<a href='rapport-delete.php?id=" . $row['id'] . "' title='Delete Record' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                            echo "<a href='rapport-read.php?id=" . $row['id'] . "' title='Afficher enregistrement' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
+                            echo "<a href='rapport-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                            echo "<a href='rapport-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
                             echo "</td>";
                             echo "</tr>";
                         }

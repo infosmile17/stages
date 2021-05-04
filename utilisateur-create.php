@@ -157,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <span class="form-text"><?php echo $type_err; ?></span>
                     </div>
 
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="submit" class="btn btn-primary" value="Envoyer">
                     <a href="utilisateur-index.php" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>

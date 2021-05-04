@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 26 avr. 2021 à 10:53
+-- Généré le :  mar. 04 mai 2021 à 06:23
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.4.0
 
@@ -35,14 +35,14 @@ CREATE TABLE IF NOT EXISTS `actualite` (
   `description` text NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `actualite`
 --
 
 INSERT INTO `actualite` (`id`, `titre`, `description`, `date`) VALUES
-(1, 'test actualité', 'je sais pas mais cvv', '2021-04-25');
+(5, 'test', 'font-size font-size', '2021-05-03');
 
 -- --------------------------------------------------------
 
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
   `id_etudiant` int(11) NOT NULL,
   `niveau` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `etudiant`
@@ -124,7 +124,8 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
 INSERT INTO `etudiant` (`id`, `id_etudiant`, `niveau`) VALUES
 (1, 2, 3),
 (2, 2, 3),
-(3, 4, 3);
+(3, 4, 3),
+(4, 27, 1);
 
 -- --------------------------------------------------------
 
@@ -177,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(30) NOT NULL,
   `prenom` varchar(30) NOT NULL,
-  `tel` int(11) NOT NULL,
+  `tel` int(30) NOT NULL,
   `email` varchar(50) NOT NULL,
   `adresse` varchar(50) NOT NULL,
   `cin` varchar(10) NOT NULL,
@@ -185,8 +186,9 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `pwd` varchar(30) NOT NULL,
   `approuver` int(11) NOT NULL,
   `type` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login` (`login`)
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -194,17 +196,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `tel`, `email`, `adresse`, `cin`, `login`, `pwd`, `approuver`, `type`) VALUES
 (5, 'sam', 'sam', 9877665, 'sam@gmail.com', 'sam', '0987777', 'sam', 'sam', 0, 1),
-(2, 'sam', 'sam', 98776666, 'sam@gmail.com', 'sam afi', '09876543', 'sam', 'sam', 1, 1),
-(4, 'test', 'test', 888888, 'test@gmail.com', 'test', '09876543', 'test', 'test', 0, 1),
-(6, 'sam', 'sam', 9877665, 'sam@gmail.com', 'sam', '0987777', 'sam', 'sam', 0, 1),
-(7, 'sam', 'sam', 9877665, 'sam@gmail.com', 'sam', '0987777', 'sam', 'sam', 0, 1),
-(8, 'sam', 'sam', 9877665, 'sam@gmail.com', 'sam', '0987777', 'sam', 'sam', 0, 1),
-(9, 'sam', 'sam', 9877665, 'sam@gmail.com', 'sam', '0987777', 'sam', 'sam', 0, 1),
-(10, 'salemm', 'salemm', 98798798, 'salemm@salemm.salemm', 'salemm', '89987689', 'salemm', 'salemm', 0, 1),
-(11, 'salemm', 'salemm', 98798798, 'salemm@salemm.salemm', 'salemm', '89987689', 'salemm', 'salemm', 0, 1),
-(12, 'salemm', 'salemm', 98798798, 'salemm@salemm.salemm', 'salemm', '89987689', 'salemm', 'salemm', 0, 1),
-(13, 'salemm', 'salemm', 98798798, 'salemm@salemm.salemm', 'salemm', '89987689', 'salemm', 'salemm', 0, 1),
-(14, 'salemm', 'salemm', 98798798, 'salemm@salemm.salemm', 'salemm', '89987689', 'salemm', 'salemm', 0, 1),
+(18, 'afi', 'afi', 6587587, 'afi@afi.afi', 'afi', '8768768', 'afi', 'afi', 0, 3),
 (16, 'nawress', 'afi', 78968976, 'nawress@nawress.nawress', 'nawress', '98767655', 'nawress', 'nawress', 1, 2);
 COMMIT;
 
