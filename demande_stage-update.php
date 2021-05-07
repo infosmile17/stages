@@ -2,13 +2,13 @@
 // Include config file
 require_once "config.php";
 require_once "helpers.php";
+require_once "function.php";
 
 // Define variables and initialize with empty values
 $id_etudiant = "";
-$nom_pdf = "";
 $date_demande = "";
 $date_reponse = "";
-$etat = "";
+$etat = 1;
 
 $id_etudiant_err = "";
 $nom_pdf_err = "";
@@ -22,11 +22,12 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     // Get hidden input value
     $id = $_POST["id"];
 
-    $id_etudiant = trim($_POST["id_etudiant"]);
-    $nom_pdf = trim($_POST["nom_pdf"]);
-    $date_demande = trim($_POST["date_demande"]);
     $date_reponse = trim($_POST["date_reponse"]);
-    $etat = trim($_POST["etat"]);
+    //upload file 
+    $folder_path = 'demandes/';
+    $filename = basename($_FILES['nom_pdf']['name']);
+    $newname = $folder_path . $filename;
+    $FileType = pathinfo($newname, PATHINFO_EXTENSION);
 
 
     // Prepare an update statement
@@ -43,17 +44,34 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         exit('Something weird happened');
     }
 
-    $vars = parse_columns('demande_stage', $_POST);
-    $stmt = $pdo->prepare("UPDATE demande_stage SET id_etudiant=?,nom_pdf=?,date_demande=?,date_reponse=?,etat=? WHERE id=?");
 
-    if (!$stmt->execute([$id_etudiant, $nom_pdf, $date_demande, $date_reponse, $etat, $id])) {
-        echo "Something went wrong. Please try again later.";
-        header("location: error.php");
-    } else {
-        $stmt = null;
-        header("location: demande_stage-read.php?id=$id");
+
+    $vars = parse_columns('demande_stage', $_POST);
+    $stmt = $pdo->prepare("UPDATE demande_stage SET nom_pdf=?,date_reponse=?,etat=? WHERE id=?");
+
+
+    $FileType = pathinfo($newname, PATHINFO_EXTENSION);
+
+    if ($FileType == "pdf") {
+        if (move_uploaded_file($_FILES['nom_pdf']['tmp_name'], $newname)) {
+            if (!$stmt->execute([$filename, $date_reponse, $etat, $id])) {
+                echo "Something went wrong. Please try again later.";
+                header("location: error.php");
+            } else {
+                $stmt = null;
+                header("location: demande_stage-read.php?id=$id");
+            }
+        } else {
+
+            echo "<p>Upload Failed.</p>";
+        }
     }
+
+    //end upload file
+
 } else {
+    $nom_pdf = "";
+
     // Check existence of id parameter before processing further
     $_GET["id"] = trim($_GET["id"]);
     if (isset($_GET["id"]) && !empty($_GET["id"])) {
@@ -98,7 +116,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                 echo "Oops! Something went wrong. Please try again later.<br>" . $stmt->error;
             }
         }
-
+        $nommm = getEtudiantName($link, $id_etudiant);
         // Close statement
         mysqli_stmt_close($stmt);
     } else {
@@ -126,38 +144,32 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                     <div class="page-header">
                         <h2>Mettre à jour enregistrement</h2>
                     </div>
-                    <p>Please edit the input values and submit to update the record.</p>
-                    <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
+                    <p>Veuillez modifier les valeurs d'entrée et soumettre pour mettre à jour l'enregistrement.</p>
+                    <form enctype="multipart/form-data" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 
                         <div class="form-group">
-                            <label>id_etudiant</label>
-                            <input type="number" name="id_etudiant" class="form-control" value="<?php echo $id_etudiant; ?>">
+                            <label>Etudiant</label>
+                            <input type="text" disabled name="id_etudiant" class="form-control" value="<?php echo $nommm; ?>">
                             <span class="form-text"><?php echo $id_etudiant_err; ?></span>
                         </div>
                         <div class="form-group">
-                            <label>nom_pdf</label>
-                            <input type="text" name="nom_pdf" maxlength="250" class="form-control" value="<?php echo $nom_pdf; ?>">
+                            <label>Lien PDF</label>
+                            <input type="file" name="nom_pdf" maxlength="250" class="form-control" value="<?php echo $nom_pdf; ?>">
                             <span class="form-text"><?php echo $nom_pdf_err; ?></span>
                         </div>
                         <div class="form-group">
-                            <label>date_demande</label>
-                            <input type="text" name="date_demande" class="form-control" value="<?php echo $date_demande; ?>">
+                            <label>Date demande</label>
+                            <input type="text" disabled name="date_demande" class="form-control" value="<?php echo $date_demande; ?>">
                             <span class="form-text"><?php echo $date_demande_err; ?></span>
                         </div>
                         <div class="form-group">
-                            <label>date_reponse</label>
-                            <input type="text" name="date_reponse" class="form-control" value="<?php echo $date_reponse; ?>">
+                            <label>Date reponse</label>
+                            <input type="date" name="date_reponse" class="form-control" value="<?php echo $date_reponse; ?>">
                             <span class="form-text"><?php echo $date_reponse_err; ?></span>
                         </div>
-                        <div class="form-group">
-                            <label>etat</label>
-                            <input type="number" name="etat" class="form-control" value="<?php echo $etat; ?>">
-                            <span class="form-text"><?php echo $etat_err; ?></span>
-                        </div>
-
                         <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="demande_stage-index.php" class="btn btn-secondary">Cancel</a>
+                        <input type="submit" class="btn btn-primary" value="Envoyer">
+                        <a href="demande_stage-index.php" class="btn btn-secondary">Annuler</a>
                     </form>
                 </div>
             </div>

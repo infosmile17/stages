@@ -45,6 +45,9 @@ include_once('navbar.php');
                 //$no_of_records_per_page is set on the index page. Default is 10.
                 $offset = ($pageno - 1) * $no_of_records_per_page;
 
+                include_once('function.php');
+
+
                 $total_pages_sql = "SELECT COUNT(*) FROM etudiant";
                 $result = mysqli_query($link, $total_pages_sql);
                 $total_rows = mysqli_fetch_array($result)[0];
@@ -99,8 +102,8 @@ include_once('navbar.php');
                         echo "<table class='table table-bordered table-striped'>";
                         echo "<thead>";
                         echo "<tr>";
-                        echo "<th><a href=?search=$search&sort=&order=id_etudiant&sort=$sort>id_etudiant</th>";
-                        echo "<th><a href=?search=$search&sort=&order=niveau&sort=$sort>niveau</th>";
+                        echo "<th><a href=?search=$search&sort=&order=id_etudiant&sort=$sort>Etudiant</th>";
+                        echo "<th><a href=?search=$search&sort=&order=niveau&sort=$sort>Niveau</th>";
 
                         echo "<th>Action</th>";
                         echo "</tr>";
@@ -108,7 +111,7 @@ include_once('navbar.php');
                         echo "<tbody>";
                         while ($row = mysqli_fetch_array($result)) {
                             echo "<tr>";
-                            echo "<td>" . $row['id_etudiant'] . "</td>";
+                            echo "<td>" . getEtudiantName($link, $row['id_etudiant']) . "</td>";
                             echo "<td>" . $row['niveau'] . "</td>";
                             echo "<td>";
                             echo "<a href='etudiant-read.php?id=" . $row['id'] . "' title='Afficher enregistrement' data-toggle='tooltip'><i class='far fa-eye'></i></a>";

@@ -111,10 +111,11 @@ include_once('navbar.php');
                         echo "<th><a href=?search=$search&sort=&order=tel&sort=$sort>Téléphone</th>";
                         echo "<th><a href=?search=$search&sort=&order=email&sort=$sort>Email</th>";
                         echo "<th><a href=?search=$search&sort=&order=adresse&sort=$sort>Adresse</th>";
+
                         echo "<th><a href=?search=$search&sort=&order=cin&sort=$sort>CIN</th>";
                         echo "<th><a href=?search=$search&sort=&order=login&sort=$sort>Login</th>";
 
-                        if ($_SESSION['users']['type'] != 2) {
+                        if ($_SESSION['users']['type'] == 3) {
                             echo "<th><a href=?search=$search&sort=&order=approuver&sort=$sort>Approuver</th>";
                         }
 
@@ -140,7 +141,7 @@ include_once('navbar.php');
                             echo "<td>" . $row['tel'] . "</td>";
                             echo "<td>" . $row['email'] . "</td>";
                             echo "<td>" . $row['adresse'] . "</td>";
-                            if ($_SESSION['users']['type'] != 2) {
+                            if ($_SESSION['users']['type'] == 3) {
                                 echo "<td>" . $row['cin'] . "</td>";
                                 echo "<td>" . $row['login'] . "</td><td>";
                                 if ($row['approuver'] == '0') {
@@ -150,18 +151,19 @@ include_once('navbar.php');
                                 }
                             } elseif ($_SESSION['users']['id'] == $row['id']) {
                                 echo "<td>" . $row['cin'] . "</td>";
-                                echo "<td>" . $row['login'] . "</td><td>";
+                                echo "<td>" . $row['login'] . "</td>";
                             } else {
-                                echo "<td></td>";
                                 echo "<td></td><td>";
                             }
 
-                            echo "</td><td>" . $type . "</td>";
+                            echo "<td>" . $type . "</td>";
                             echo "<td>";
                             echo "<a href='utilisateur-read.php?id=" . $row['id'] . "' title='Afficher enregistrement' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                            if ($_SESSION['users']['type'] != 2) {
+                            if ($_SESSION['users']['type'] == 3) {
                                 echo "<a href='utilisateur-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
                                 echo "<a href='utilisateur-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                            } elseif ($_SESSION['users']['id'] == $row['id']) {
+                                echo "<a href='utilisateur-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
                             }
                             echo "</td>";
                             echo "</tr>";

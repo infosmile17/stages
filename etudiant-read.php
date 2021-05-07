@@ -38,6 +38,10 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
         }
     }
 
+    include_once('function.php');
+
+    $nomm = getEtudiantName($link, $row["id_etudiant"]);
+
     // Close statement
     mysqli_stmt_close($stmt);
 
@@ -48,6 +52,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     header("location: error.php");
     exit();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,15 +73,15 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
                     </div>
 
                     <div class="form-group">
-                        <label>id_etudiant</label>
-                        <p class="form-control-static"><?php echo $row["id_etudiant"]; ?></p>
+                        <label>Etudiant</label>
+                        <p class="form-control-static"><?php echo $nomm; ?></p>
                     </div>
                     <div class="form-group">
-                        <label>niveau</label>
+                        <label>Niveau</label>
                         <p class="form-control-static"><?php echo $row["niveau"]; ?></p>
                     </div>
 
-                    <p><a href="etudiant-index.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="etudiant-index.php" class="btn btn-primary">Listes des niveaux </a></p>
                 </div>
             </div>
         </div>

@@ -35,9 +35,9 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     }
 
     $vars = parse_columns('etudiant', $_POST);
-    $stmt = $pdo->prepare("UPDATE etudiant SET id_etudiant=?,niveau=? WHERE id=?");
+    $stmt = $pdo->prepare("UPDATE etudiant SET niveau=? WHERE id=?");
 
-    if (!$stmt->execute([$id_etudiant, $niveau, $id])) {
+    if (!$stmt->execute([$niveau, $id])) {
         echo "Something went wrong. Please try again later.";
         header("location: error.php");
     } else {
@@ -72,10 +72,8 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                     /* Fetch result row as an associative array. Since the result set
                     contains only one row, we don't need to use while loop */
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-                    // Retrieve individual field value
-
                     $id_etudiant = $row["id_etudiant"];
+                    // Retrieve individual field value
                     $niveau = $row["niveau"];
                 } else {
                     // URL doesn't contain valid id. Redirect to error page
@@ -95,6 +93,9 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         exit();
     }
 }
+include_once('function.php');
+$nomm = getEtudiantName($link, $id_etudiant);
+
 ?>
 
 <!DOCTYPE html>
@@ -114,23 +115,32 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                     <div class="page-header">
                         <h2>Mettre à jour enregistrement</h2>
                     </div>
-                    <p>Please edit the input values and submit to update the record.</p>
+                    <p>Veuillez modifier les valeurs d'entrée et soumettre pour mettre à jour l'enregistrement.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 
                         <div class="form-group">
-                            <label>id_etudiant</label>
-                            <input type="number" name="id_etudiant" class="form-control" value="<?php echo $id_etudiant; ?>">
+                            <label>Etudiant</label>
+                            <input type="text" readonly name="id_etudiant" class="form-control" value="<?php echo $nomm; ?>">
                             <span class="form-text"><?php echo $id_etudiant_err; ?></span>
                         </div>
                         <div class="form-group">
                             <label>niveau</label>
-                            <input type="number" name="niveau" class="form-control" value="<?php echo $niveau; ?>">
+                            <input type="radio" id="_1ere" name="niveau" value="1" <?php if ($niveau == 1) echo 'checked'; ?>>
+                            <label for="_1ere">1 ere </label>
+                            <input type="radio" id="_2eme" name="niveau" value="2" <?php if ($niveau == 2) echo 'checked'; ?>>
+                            <label for="_2eme">2 eme</label>
+                            <input type="radio" id="_3eme" name="niveau" value="3" <?php if ($niveau == 3) echo 'checked'; ?>>
+                            <label for="_3eme">3 eme</label>
+                            <input type="radio" id="_4eme" name="niveau" value="4" <?php if ($niveau == 4) echo 'checked'; ?>>
+                            <label for="_4eme">4 eme</label>
+                            <input type="radio" id="_5eme" name="niveau" value="5" <?php if ($niveau == 5) echo 'checked'; ?>>
+                            <label for="_5eme">5 eme</label>
                             <span class="form-text"><?php echo $niveau_err; ?></span>
                         </div>
 
                         <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="etudiant-index.php" class="btn btn-secondary">Cancel</a>
+                        <input type="submit" class="btn btn-primary" value="Envoyer">
+                        <a href="etudiant-index.php" class="btn btn-secondary">Annuler</a>
                     </form>
                 </div>
             </div>

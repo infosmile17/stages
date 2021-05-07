@@ -1,6 +1,7 @@
 <?php
 include_once('header.php');
 include_once('navbar.php');
+include_once('function.php');
 ?>
 <section class="pt-5">
     <div class="container-fluid">
@@ -8,7 +9,9 @@ include_once('navbar.php');
             <div class="col-md-12">
                 <div class="page-header clearfix">
                     <h2 class="float-left">Les demandes de stages</h2>
-                    <a href="demande_stage-create.php" class="btn btn-success float-right">Ajouter un nouvel enregistrement</a>
+                    <?php if ($_SESSION['users']['type'] == 1) { ?>
+                        <a href="demande_stage-create.php" class="btn btn-success float-right">Ajouter un nouvel enregistrement</a>
+                    <?php } ?>
                     <a href="demande_stage-index.php" class="btn btn-info float-right mr-2">Réinitialiser la vue</a>
 
                 </div>
@@ -68,10 +71,13 @@ include_once('navbar.php');
                         $sort = 'asc';
                     }
                 }
-
+                $wheresql = '';
+                if ($_SESSION['users']['type'] == 1) {
+                    $wheresql = "where id_etudiant = " . $_SESSION['users']['id'];
+                }
                 // Attempt select query execution
-                $sql = "SELECT * FROM demande_stage ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
-                $count_pages = "SELECT * FROM demande_stage";
+                $sql = "SELECT * FROM demande_stage " . $wheresql . " ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                $count_pages = "SELECT * FROM demande_stage " . $wheresql;
 
 
                 if (!empty($_GET['search'])) {
@@ -100,11 +106,11 @@ include_once('navbar.php');
                         echo "<table class='table table-bordered table-striped'>";
                         echo "<thead>";
                         echo "<tr>";
-                        echo "<th><a href=?search=$search&sort=&order=id_etudiant&sort=$sort>id_etudiant</th>";
-                        echo "<th><a href=?search=$search&sort=&order=nom_pdf&sort=$sort>nom_pdf</th>";
-                        echo "<th><a href=?search=$search&sort=&order=date_demande&sort=$sort>date_demande</th>";
-                        echo "<th><a href=?search=$search&sort=&order=date_reponse&sort=$sort>date_reponse</th>";
-                        echo "<th><a href=?search=$search&sort=&order=etat&sort=$sort>etat</th>";
+                        echo "<th><a href=?search=$search&sort=&order=id_etudiant&sort=$sort>Etudiant</th>";
+                        echo "<th><a href=?search=$search&sort=&order=nom_pdf&sort=$sort>Lien PDF</th>";
+                        echo "<th><a href=?search=$search&sort=&order=date_demande&sort=$sort>date demande</th>";
+                        echo "<th><a href=?search=$search&sort=&order=date_reponse&sort=$sort>date reponse</th>";
+                        echo "<th><a href=?search=$search&sort=&order=etat&sort=$sort>Etat</th>";
 
                         echo "<th>Action</th>";
                         echo "</tr>";
@@ -112,15 +118,17 @@ include_once('navbar.php');
                         echo "<tbody>";
                         while ($row = mysqli_fetch_array($result)) {
                             echo "<tr>";
-                            echo "<td>" . $row['id_etudiant'] . "</td>";
-                            echo "<td>" . $row['nom_pdf'] . "</td>";
+                            echo "<td>" . getEtudiantName($link, $row['id_etudiant']) . "</td>";
+                            echo "<td><a href='/stages_/stages/demandes/" . $row['nom_pdf'] . "'>" . $row['nom_pdf'] . "</a></td>";
                             echo "<td>" . $row['date_demande'] . "</td>";
                             echo "<td>" . $row['date_reponse'] . "</td>";
-                            echo "<td>" . $row['etat'] . "</td>";
+                            echo "<td>" . getEtat($row['etat']) . "</td>";
                             echo "<td>";
                             echo "<a href='demande_stage-read.php?id=" . $row['id'] . "' title='Afficher enregistrement' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                            echo "<a href='demande_stage-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                            echo "<a href='demande_stage-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                            if ($_SESSION['users']['type'] == 3) {
+                                echo "<a href='demande_stage-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                                echo "<a href='demande_stage-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                            }
                             echo "</td>";
                             echo "</tr>";
                         }
@@ -165,6 +173,10 @@ include_once('navbar.php');
                 } else {
                     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
                 }
+
+
+
+
 
                 // Close connection
                 mysqli_close($link);

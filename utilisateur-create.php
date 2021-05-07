@@ -81,11 +81,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Something went wrong. Please try again later.";
         }
-
-
-
-
-
         header("location: utilisateur-index.php");
     } else {
         echo "Something went wrong. Please try again later.";
@@ -102,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <p>Merci d'avoir utiliser notre application .</p>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-
                     <div class="form-group">
                         <label>Nom</label>
                         <input type="text" name="nom" maxlength="30" class="form-control" value="<?php echo $nom; ?>">

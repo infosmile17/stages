@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <?php
 
                             // Attempt select query execution
-                            $sql_users = "SELECT * FROM utilisateur WHERE type=1";
+                            $sql_users = "SELECT * FROM utilisateur WHERE type=1 and id NOT IN (SELECT id_etudiant FROM etudiant)";
 
                             if ($result = mysqli_query($link, $sql_users)) {
                                 if (mysqli_num_rows($result) > 0) {
@@ -86,8 +86,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label for="_5eme">5 eme</label>
                         <span class="form-text"><?php echo $niveau_err; ?></span>
                     </div>
-
-                    <input type="submit" class="btn btn-primary" value="Enregistrer">
+                    <input type="submit" class="btn btn-primary" value="Enregistrer" <?php
+                                                                                        if (mysqli_num_rows($result) == 0) {
+                                                                                            echo 'disabled';
+                                                                                        }
+                                                                                        ?>>
                     <a href="etudiant-index.php" class="btn btn-secondary">Annuler</a>
                 </form>
             </div>

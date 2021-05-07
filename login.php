@@ -44,9 +44,15 @@ session_start();
 
                         if (mysqli_num_rows($result) == 1) {
                             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                            $_SESSION['users'] = $row;
+                            if ($row['approuver'] == 1) {
+                                $_SESSION['users'] = $row;
 
-                            header("location: actualite-index.php");
+                                header("location: actualite-index.php");
+                            } else {
+                                header("location: login.php?msg=En cours d'approbation par un administrateur!");
+                            }
+
+
                             //var_dump($_SESSION['users']['type']);
                             //die();
                         } else {

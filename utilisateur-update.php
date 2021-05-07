@@ -181,11 +181,23 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                     </div>
                     <div class="form-group">
                         Vous étes un :
-                        <input type="radio" id="etudiant" name="type" value="1" <?php if ($type == 1) echo 'checked'; ?>>
+                        <input type="radio" id="etudiant" name="type" value="1" <?php if ($type == 1) {
+                                                                                    echo 'checked';
+                                                                                } else {
+                                                                                    echo 'disabled';
+                                                                                } ?>>
                         <label for="etudiant">Etudiant</label>
-                        <input type="radio" id="enseignant" name="type" value="2" <?php if ($type == 2) echo 'checked'; ?>>
+                        <input type="radio" id="enseignant" name="type" value="2" <?php if ($type == 2) {
+                                                                                        echo 'checked';
+                                                                                    } else {
+                                                                                        echo 'disabled';
+                                                                                    } ?>>
                         <label for="enseignant">Enseignant</label>
-                        <input type="radio" id="admin" name="type" value="3" <?php if ($type == 3) echo 'checked'; ?>>
+                        <input type="radio" id="admin" name="type" value="3" <?php if ($type == 3) {
+                                                                                    echo 'checked';
+                                                                                } else {
+                                                                                    echo 'disabled';
+                                                                                } ?>>
                         <label for="admin">Admin</label>
                     </div>
 
