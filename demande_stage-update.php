@@ -8,7 +8,7 @@ require_once "function.php";
 $id_etudiant = "";
 $date_demande = "";
 $date_reponse = "";
-$etat = 1;
+
 
 $id_etudiant_err = "";
 $nom_pdf_err = "";
@@ -132,7 +132,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Mettre à jour enregistrement</title>
+    <title>Répondre à une demande de stage</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
@@ -142,7 +142,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
             <div class="row">
                 <div class="col-md-6 mx-auto">
                     <div class="page-header">
-                        <h2>Mettre à jour enregistrement</h2>
+                        <h2>Répondre à une demande de stage</h2>
                     </div>
                     <p>Veuillez modifier les valeurs d'entrée et soumettre pour mettre à jour l'enregistrement.</p>
                     <form enctype="multipart/form-data" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">

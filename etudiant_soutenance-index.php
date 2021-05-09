@@ -1,6 +1,7 @@
 <?php
 include_once('header.php');
 include_once('navbar.php');
+include_once('function.php');
 ?>
 <section class="pt-5">
     <div class="container-fluid">
@@ -8,20 +9,16 @@ include_once('navbar.php');
             <div class="col-md-12">
                 <div class="page-header clearfix">
                     <h2 class="float-left">Les dates des soutenances pour les etudiants</h2>
-                    <a href="etudiant_soutenance-create.php" class="btn btn-success float-right">Ajouter un nouvel enregistrement</a>
+                    <?php if (isset($_SESSION['users']['type']) == 3) { ?>
+                        <a href="etudiant_soutenance-create.php" class="btn btn-success float-right">Ajouter un nouvel enregistrement</a>
+                    <?php } ?>
                     <a href="etudiant_soutenance-index.php" class="btn btn-info float-right mr-2">Réinitialiser la vue</a>
-
                 </div>
-
                 <div class="form-row">
                     <form action="etudiant_soutenance-index.php" method="get">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Rechercher ..." name="search">
-                        </div>
                 </div>
                 </form>
                 <br>
-
                 <?php
                 // Include config file
                 require_once "config.php";
@@ -89,6 +86,7 @@ include_once('navbar.php');
                     $search = "";
                 }
 
+
                 if ($result = mysqli_query($link, $sql)) {
                     if (mysqli_num_rows($result) > 0) {
                         if ($result_count = mysqli_query($link, $count_pages)) {
@@ -100,23 +98,29 @@ include_once('navbar.php');
                         echo "<table class='table table-bordered table-striped'>";
                         echo "<thead>";
                         echo "<tr>";
-                        echo "<th><a href=?search=$search&sort=&order=id_etudiant&sort=$sort>id_etudiant</th>";
-                        echo "<th><a href=?search=$search&sort=&order=date&sort=$sort>date</th>";
-                        echo "<th><a href=?search=$search&sort=&order=temps&sort=$sort>temps</th>";
+                        echo "<th><a href=?search=$search&sort=&order=id_etudiant&sort=$sort>Etudiant</th>";
+                        echo "<th><a href=?search=$search&sort=&order=date&sort=$sort>Date</th>";
+                        echo "<th><a href=?search=$search&sort=&order=temps&sort=$sort>Temps</th>";
 
                         echo "<th>Action</th>";
                         echo "</tr>";
                         echo "</thead>";
                         echo "<tbody>";
+
+
                         while ($row = mysqli_fetch_array($result)) {
+                            $nomm = getEtudiantName($link, $row['id_etudiant']);
+
                             echo "<tr>";
-                            echo "<td>" . $row['id_etudiant'] . "</td>";
+                            echo "<td>" . $nomm . "</td>";
                             echo "<td>" . $row['date'] . "</td>";
                             echo "<td>" . $row['temps'] . "</td>";
                             echo "<td>";
                             echo "<a href='etudiant_soutenance-read.php?id=" . $row['id'] . "' title='Afficher enregistrement' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                            echo "<a href='etudiant_soutenance-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                            echo "<a href='etudiant_soutenance-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                            if (isset($_SESSION['users']['type']) == 3) {
+                                echo "<a href='etudiant_soutenance-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                                echo "<a href='etudiant_soutenance-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                            }
                             echo "</td>";
                             echo "</tr>";
                         }

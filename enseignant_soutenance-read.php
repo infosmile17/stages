@@ -5,6 +5,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     // Include config file
     require_once "config.php";
     require_once "helpers.php";
+    require_once "function.php";
 
     // Prepare a select statement
     $sql = "SELECT * FROM enseignant_soutenance WHERE id = ?";
@@ -38,6 +39,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
         }
     }
 
+    $name = getEtudiantName($link, $row["id_enseignant"]);
     // Close statement
     mysqli_stmt_close($stmt);
 
@@ -68,19 +70,19 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
                     </div>
 
                     <div class="form-group">
-                        <label>id_enseignant</label>
-                        <p class="form-control-static"><?php echo $row["id_enseignant"]; ?></p>
+                        <label>Enseignant</label>
+                        <p class="form-control-static"><?php echo $name; ?></p>
                     </div>
                     <div class="form-group">
-                        <label>date</label>
+                        <label>Date</label>
                         <p class="form-control-static"><?php echo $row["date"]; ?></p>
                     </div>
                     <div class="form-group">
-                        <label>temps</label>
+                        <label>Temps</label>
                         <p class="form-control-static"><?php echo $row["temps"]; ?></p>
                     </div>
 
-                    <p><a href="enseignant_soutenance-index.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="enseignant_soutenance-index.php" class="btn btn-primary">Listes des soutenance des enseignants</a></p>
                 </div>
             </div>
         </div>

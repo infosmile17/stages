@@ -52,29 +52,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <div class="page-header">
-                    <h2>Affecter une dates de soutenances à un etudiant</h2>
+                    <h2>Affecter une date de soutenance à un etudiant</h2>
                 </div>
                 <p>.</p>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                     <div class="form-group">
-                        <label>id_etudiant</label>
-                        <input type="number" name="id_etudiant" class="form-control" value="<?php echo $id_etudiant; ?>">
+                        <label>Selectionner un etudiant</label>
+                        <select name="id_etudiant" id="id_etudiant" class="form-control">
+                            <?php
+
+                            // Attempt select query execution
+                            $sql_users = "SELECT * FROM utilisateur WHERE type=1 and id NOT IN (SELECT id_etudiant FROM etudiant_soutenance)";
+
+                            if ($result = mysqli_query($link, $sql_users)) {
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_array($result)) {
+                                        echo "<option class='form-control' value='" . $row['id'] . "'>" . $row['nom'] . ' ' . $row['prenom'] . "</option>";
+                                    }
+                                }
+                            }
+                            ?>
+                        </select>
                         <span class="form-text"><?php echo $id_etudiant_err; ?></span>
                     </div>
                     <div class="form-group">
-                        <label>date</label>
-                        <input type="text" name="date" class="form-control" value="<?php echo $date; ?>">
+                        <label>Date</label>
+                        <input type="date" name="date" class="form-control" value="<?php echo $date; ?>">
                         <span class="form-text"><?php echo $date_err; ?></span>
                     </div>
                     <div class="form-group">
-                        <label>temps</label>
-                        <input type="text" name="temps" class="form-control" value="<?php echo $temps; ?>">
+                        <label>Temps</label>
+                        <input type="time" name="temps" class="form-control" value="<?php echo $temps; ?>">
                         <span class="form-text"><?php echo $temps_err; ?></span>
                     </div>
 
-                    <input type="submit" class="btn btn-primary" value="Submit">
-                    <a href="etudiant_soutenance-index.php" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" class="btn btn-primary" value="Envoyer">
+                    <a href="etudiant_soutenance-index.php" class="btn btn-secondary">Annuler</a>
                 </form>
             </div>
         </div>

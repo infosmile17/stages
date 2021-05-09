@@ -14,9 +14,7 @@ include_once('navbar.php');
 
                 <div class="form-row">
                     <form action="etudiant-index.php" method="get">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Rechercher ..." name="search">
-                        </div>
+
                 </div>
                 </form>
                 <br>

@@ -2,6 +2,7 @@
 // Include config file
 require_once "config.php";
 require_once "helpers.php";
+require_once "function.php";
 
 // Define variables and initialize with empty values
 $id_enseignant = "";
@@ -18,7 +19,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     // Get hidden input value
     $id = $_POST["id"];
 
-    $id_enseignant = trim($_POST["id_enseignant"]);
+    $id_enseignant = '';
     $date = trim($_POST["date"]);
     $temps = trim($_POST["temps"]);
 
@@ -38,9 +39,9 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     }
 
     $vars = parse_columns('enseignant_soutenance', $_POST);
-    $stmt = $pdo->prepare("UPDATE enseignant_soutenance SET id_enseignant=?,date=?,temps=? WHERE id=?");
+    $stmt = $pdo->prepare("UPDATE enseignant_soutenance SET date=?,temps=? WHERE id=?");
 
-    if (!$stmt->execute([$id_enseignant, $date, $temps, $id])) {
+    if (!$stmt->execute([$date, $temps, $id])) {
         echo "Something went wrong. Please try again later.";
         header("location: error.php");
     } else {
@@ -99,6 +100,11 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         exit();
     }
 }
+if ($id_enseignant != '') {
+    $nomm = getEtudiantName($link, $id_enseignant);
+} else {
+    $nomm = '';
+}
 ?>
 
 <!DOCTYPE html>
@@ -122,24 +128,24 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
 
                         <div class="form-group">
-                            <label>id_enseignant</label>
-                            <input type="number" name="id_enseignant" class="form-control" value="<?php echo $id_enseignant; ?>">
+                            <label>Enseignant</label>
+                            <input type="text" disabled name="id_enseignant" class="form-control" value="<?php echo $nomm; ?>">
                             <span class="form-text"><?php echo $id_enseignant_err; ?></span>
                         </div>
                         <div class="form-group">
-                            <label>date</label>
-                            <input type="text" name="date" class="form-control" value="<?php echo $date; ?>">
+                            <label>Date</label>
+                            <input type="date" name="date" class="form-control" value="<?php echo $date; ?>">
                             <span class="form-text"><?php echo $date_err; ?></span>
                         </div>
                         <div class="form-group">
-                            <label>temps</label>
-                            <input type="text" name="temps" class="form-control" value="<?php echo $temps; ?>">
+                            <label>Temps</label>
+                            <input type="time" name="temps" class="form-control" value="<?php echo $temps; ?>">
                             <span class="form-text"><?php echo $temps_err; ?></span>
                         </div>
 
                         <input type="hidden" name="id" value="<?php echo $id; ?>" />
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="enseignant_soutenance-index.php" class="btn btn-secondary">Cancel</a>
+                        <input type="submit" class="btn btn-primary" value="Envoyer">
+                        <a href="enseignant_soutenance-index.php" class="btn btn-secondary">Annuler</a>
                     </form>
                 </div>
             </div>

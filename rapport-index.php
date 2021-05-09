@@ -1,6 +1,7 @@
 <?php
 include_once('header.php');
 include_once('navbar.php');
+include_once('function.php');
 ?>
 <section class="pt-5">
     <div class="container-fluid">
@@ -8,16 +9,16 @@ include_once('navbar.php');
             <div class="col-md-12">
                 <div class="page-header clearfix">
                     <h2 class="float-left">Listes des rapports de stages</h2>
-                    <a href="rapport-create.php" class="btn btn-success float-right">Ajouter un nouvel enregistrement</a>
+                    <?php if ($_SESSION['users']['type'] == 1) { ?>
+                        <a href="rapport-create.php" class="btn btn-success float-right">Ajouter un rapport</a>
+                    <?php } ?>
                     <a href="rapport-index.php" class="btn btn-info float-right mr-2">Réinitialiser la vue</a>
 
                 </div>
 
                 <div class="form-row">
                     <form action="rapport-index.php" method="get">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Rechercher ..." name="search">
-                        </div>
+
                 </div>
                 </form>
                 <br>

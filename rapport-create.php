@@ -4,12 +4,12 @@ include_once('header.php');
 include_once('navbar.php');
 require_once "config.php";
 require_once "helpers.php";
+require_once "function.php";
 
 // Define variables and initialize with empty values
-$id_etudiant = "";
 $titre = "";
-$nom_pdf = "";
 $date = "";
+$public = 0;
 
 $id_etudiant_err = "";
 $titre_err = "";
@@ -19,10 +19,9 @@ $date_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id_etudiant = trim($_POST["id_etudiant"]);
     $titre = trim($_POST["titre"]);
-    $nom_pdf = trim($_POST["nom_pdf"]);
     $date = trim($_POST["date"]);
+    $public = trim($_POST["public"]);
 
 
     $dsn = "mysql:host=$db_server;dbname=$db_name;charset=utf8mb4";
@@ -38,15 +37,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit('Something weird happened'); //something a user can understand
     }
 
-    $vars = parse_columns('rapport', $_POST);
-    $stmt = $pdo->prepare("INSERT INTO rapport (id_etudiant,titre,nom_pdf,date) VALUES (?,?,?,?)");
+    $folder_path = 'rapports/';
+    $filename = basename($_FILES['nom_pdf']['name']);
+    $newname = $folder_path . $filename;
+    $FileType = pathinfo($newname, PATHINFO_EXTENSION);
 
-    if ($stmt->execute([$id_etudiant, $titre, $nom_pdf, $date])) {
-        $stmt = null;
-        header("location: rapport-index.php");
-    } else {
-        echo "Something went wrong. Please try again later.";
+    $vars = parse_columns('rapport', $_POST);
+    $stmt = $pdo->prepare("INSERT INTO rapport (titre,nom_pdf,date,public) VALUES (?,?,?,?)");
+
+
+    $FileType = pathinfo($newname, PATHINFO_EXTENSION);
+
+    if ($FileType == "pdf") {
+        if (move_uploaded_file($_FILES['nom_pdf']['tmp_name'], $newname)) {
+            if (!$stmt->execute([$titre, $filename, $date, $public])) {
+                echo "Something went wrong. Please try again later.";
+                header("location: error.php");
+            } else {
+                $stmt = null;
+                header("location: demande_stage-read.php?id=$id");
+            }
+        } else {
+
+            echo "<p>Upload Failed.</p>";
+        }
     }
+
+    //end upload file
 }
 ?>
 
@@ -58,31 +75,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h2>Créer un enregistrement</h2>
                 </div>
                 <p>.</p>
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-
+                <form enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     <div class="form-group">
-                        <label>id_etudiant</label>
-                        <input type="number" name="id_etudiant" class="form-control" value="<?php echo $id_etudiant; ?>">
-                        <span class="form-text"><?php echo $id_etudiant_err; ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label>titre</label>
+                        <label>Titre</label>
                         <input type="text" name="titre" maxlength="250" class="form-control" value="<?php echo $titre; ?>">
                         <span class="form-text"><?php echo $titre_err; ?></span>
                     </div>
                     <div class="form-group">
                         <label>Rapport (pdf)</label>
-                        <input type="text" name="nom_pdf" maxlength="250" class="form-control" value="<?php echo $nom_pdf; ?>">
+                        <input type="file" name="nom_pdf" maxlength="250" class="form-control" value="<?php echo ''; ?>">
                         <span class="form-text"><?php echo $nom_pdf_err; ?></span>
                     </div>
                     <div class="form-group">
-                        <label>date</label>
+                        <label>Date</label>
                         <input type="date" name="date" class="form-control" value="<?php echo $date; ?>">
                         <span class="form-text"><?php echo $date_err; ?></span>
                     </div>
+                    <div class="form-group">
+                        <label>Visibilité</label><br>
+                        <input type="radio" id="prive" name="public" value="prive">
+                        <label for="prive">Privé</label><br>
+                        <input type="radio" id="public" name="public" value="public">
+                        <label for="public">Public</label><br>
 
-                    <input type="submit" class="btn btn-primary" value="Submit">
-                    <a href="rapport-index.php" class="btn btn-secondary">Cancel</a>
+
+                        <span class="form-text"><?php echo $date_err; ?></span>
+                    </div>
+
+
+                    <input type="submit" class="btn btn-primary" value="Envoyer">
+                    <a href="rapport-index.php" class="btn btn-secondary">Annuler</a>
                 </form>
             </div>
         </div>

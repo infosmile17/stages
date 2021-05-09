@@ -72,7 +72,7 @@ $nomm = getEtudiantName($link, $_SESSION['users']['id']);
                         <span class="form-text"><?php echo $id_etudiant_err; ?></span>
                     </div>
                     <div class="form-group">
-                        <label>date_demande</label>
+                        <label>date demande</label>
                         <input type="date" name="date_demande" class="form-control" value="<?php echo $date_demande; ?>">
                         <span class="form-text"><?php echo $date_demande_err; ?></span>
                     </div>

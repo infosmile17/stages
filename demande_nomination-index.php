@@ -1,6 +1,7 @@
 <?php
 include_once('header.php');
 include_once('navbar.php');
+include_once('function.php');
 ?>
 <section class="pt-5">
     <div class="container-fluid">
@@ -8,16 +9,16 @@ include_once('navbar.php');
             <div class="col-md-12">
                 <div class="page-header clearfix">
                     <h2 class="float-left">Les demandes de nominations</h2>
-                    <a href="demande_nomination-create.php" class="btn btn-success float-right">Ajouter un nouvel enregistrement</a>
+                    <?php if ($_SESSION['users']['type'] == 1) { ?>
+                        <a href="demande_nomination-create.php" class="btn btn-success float-right">Ajouter un nouvel enregistrement</a>
+                    <?php } ?>
                     <a href="demande_nomination-index.php" class="btn btn-info float-right mr-2">Réinitialiser la vue</a>
 
                 </div>
 
                 <div class="form-row">
                     <form action="demande_nomination-index.php" method="get">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Rechercher ..." name="search">
-                        </div>
+
                 </div>
                 </form>
                 <br>
@@ -46,7 +47,13 @@ include_once('navbar.php');
                 //$no_of_records_per_page is set on the index page. Default is 10.
                 $offset = ($pageno - 1) * $no_of_records_per_page;
 
-                $total_pages_sql = "SELECT COUNT(*) FROM demande_nomination";
+                if ($_SESSION['users']['type'] == 1) {
+
+                    $total_pages_sql = "SELECT COUNT(*) FROM demande_nomination where id_etudiant=" . $_SESSION['users']['id'];
+                } else {
+                    $total_pages_sql = "SELECT COUNT(*) FROM demande_nomination";
+                }
+
                 $result = mysqli_query($link, $total_pages_sql);
                 $total_rows = mysqli_fetch_array($result)[0];
                 $total_pages = ceil($total_rows / $no_of_records_per_page);
@@ -70,23 +77,12 @@ include_once('navbar.php');
                 }
 
                 // Attempt select query execution
-                $sql = "SELECT * FROM demande_nomination ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
-                $count_pages = "SELECT * FROM demande_nomination";
-
-
-                if (!empty($_GET['search'])) {
-                    $search = ($_GET['search']);
-                    $sql = "SELECT * FROM demande_nomination
-                            WHERE CONCAT (id_etudiant,nom_pdf,date_demande,date_reponse,etat)
-                            LIKE '%$search%'
-                            ORDER BY $order $sort
-                            LIMIT $offset, $no_of_records_per_page";
-                    $count_pages = "SELECT * FROM demande_nomination
-                            WHERE CONCAT (id_etudiant,nom_pdf,date_demande,date_reponse,etat)
-                            LIKE '%$search%'
-                            ORDER BY $order $sort";
+                if ($_SESSION['users']['type'] == 1) {
+                    $sql = "SELECT * FROM demande_nomination  where id_etudiant='" . $_SESSION['users']['id'] . "' ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    $count_pages = "SELECT * FROM demande_nomination where id_etudiant=" . $_SESSION['users']['id'];
                 } else {
-                    $search = "";
+                    $sql = "SELECT * FROM demande_nomination ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    $count_pages = "SELECT * FROM demande_nomination";
                 }
 
                 if ($result = mysqli_query($link, $sql)) {
@@ -100,11 +96,11 @@ include_once('navbar.php');
                         echo "<table class='table table-bordered table-striped'>";
                         echo "<thead>";
                         echo "<tr>";
-                        echo "<th><a href=?search=$search&sort=&order=id_etudiant&sort=$sort>id_etudiant</th>";
-                        echo "<th><a href=?search=$search&sort=&order=nom_pdf&sort=$sort>nom_pdf</th>";
-                        echo "<th><a href=?search=$search&sort=&order=date_demande&sort=$sort>date_demande</th>";
-                        echo "<th><a href=?search=$search&sort=&order=date_reponse&sort=$sort>date_reponse</th>";
-                        echo "<th><a href=?search=$search&sort=&order=etat&sort=$sort>etat</th>";
+                        echo "<th><a href=?sort=&order=id_etudiant&sort=$sort>Etudiant</th>";
+                        echo "<th><a href=?sort=&order=nom_pdf&sort=$sort>Fichier PDF</th>";
+                        echo "<th><a href=?sort=&order=date_demande&sort=$sort>date demande</th>";
+                        echo "<th><a href=?sort=&order=date_reponse&sort=$sort>date reponse</th>";
+                        echo "<th><a href=?sort=&order=etat&sort=$sort>Etat</th>";
 
                         echo "<th>Action</th>";
                         echo "</tr>";
@@ -112,15 +108,17 @@ include_once('navbar.php');
                         echo "<tbody>";
                         while ($row = mysqli_fetch_array($result)) {
                             echo "<tr>";
-                            echo "<td>" . $row['id_etudiant'] . "</td>";
-                            echo "<td>" . $row['nom_pdf'] . "</td>";
+                            echo "<td>" . getEtudiantName($link, $row['id_etudiant']) . "</td>";
+                            echo "<td><a href='/stages_/stages/nominations/" . $row['nom_pdf'] . "'>" . $row['nom_pdf'] . "</a></td>";
                             echo "<td>" . $row['date_demande'] . "</td>";
                             echo "<td>" . $row['date_reponse'] . "</td>";
-                            echo "<td>" . $row['etat'] . "</td>";
+                            echo "<td>" . getEtat($row['etat']) . "</td>";
                             echo "<td>";
                             echo "<a href='demande_nomination-read.php?id=" . $row['id'] . "' title='Afficher enregistrement' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                            echo "<a href='demande_nomination-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                            echo "<a href='demande_nomination-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                            if ($_SESSION['users']['type'] == 3) {
+                                echo "<a href='demande_nomination-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                                echo "<a href='demande_nomination-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                            }
                             echo "</td>";
                             echo "</tr>";
                         }

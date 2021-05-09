@@ -5,6 +5,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     // Include config file
     require_once "config.php";
     require_once "helpers.php";
+    require_once "function.php";
 
     // Prepare a select statement
     $sql = "SELECT * FROM demande_nomination WHERE id = ?";
@@ -37,6 +38,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
             echo "Oops! Something went wrong. Please try again later.<br>" . $stmt->error;
         }
     }
+    $nomm = getEtudiantName($link, $row["id_etudiant"]);
 
     // Close statement
     mysqli_stmt_close($stmt);
@@ -68,27 +70,29 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
                     </div>
 
                     <div class="form-group">
-                        <label>id_etudiant</label>
-                        <p class="form-control-static"><?php echo $row["id_etudiant"]; ?></p>
+                        <label>Etudiant</label>
+                        <p class="form-control-static"><?php echo $nomm; ?></p>
                     </div>
                     <div class="form-group">
-                        <label>nom_pdf</label>
-                        <p class="form-control-static"><?php echo $row["nom_pdf"]; ?></p>
+                        <label>Lien PDF</label>
+                        <p class="form-control-static">
+                            <a href='/stages_/stages/nominations/<?php echo $row["nom_pdf"]; ?>'><?php echo $row["nom_pdf"]; ?></a>
+                        </p>
                     </div>
                     <div class="form-group">
-                        <label>date_demande</label>
+                        <label>date demande</label>
                         <p class="form-control-static"><?php echo $row["date_demande"]; ?></p>
                     </div>
                     <div class="form-group">
-                        <label>date_reponse</label>
+                        <label>date reponse</label>
                         <p class="form-control-static"><?php echo $row["date_reponse"]; ?></p>
                     </div>
                     <div class="form-group">
-                        <label>etat</label>
-                        <p class="form-control-static"><?php echo $row["etat"]; ?></p>
+                        <label>Etat</label>
+                        <p class="form-control-static"><?php echo getEtat($row["etat"]); ?></p>
                     </div>
 
-                    <p><a href="demande_nomination-index.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="demande_nomination-index.php" class="btn btn-primary">Liste des demandes de nomination</a></p>
                 </div>
             </div>
         </div>

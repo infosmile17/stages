@@ -58,23 +58,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
                     <div class="form-group">
-                        <label>id_enseignant</label>
-                        <input type="number" name="id_enseignant" class="form-control" value="<?php echo $id_enseignant; ?>">
+                        <label>Selectionner un enseignant</label>
+                        <select name="id_enseignant" id="id_enseignant" class="form-control">
+                            <?php
+
+                            // Attempt select query execution
+                            $sql_users = "SELECT * FROM utilisateur WHERE type=2 and id NOT IN (SELECT id_enseignant FROM enseignant_soutenance)";
+
+                            if ($result = mysqli_query($link, $sql_users)) {
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_array($result)) {
+                                        echo "<option class='form-control' value='" . $row['id'] . "'>" . $row['nom'] . ' ' . $row['prenom'] . "</option>";
+                                    }
+                                }
+                            }
+                            ?>
+                        </select>
                         <span class="form-text"><?php echo $id_enseignant_err; ?></span>
                     </div>
                     <div class="form-group">
-                        <label>date</label>
+                        <label>Date</label>
                         <input type="date" name="date" class="form-control" value="<?php echo $date; ?>">
                         <span class="form-text"><?php echo $date_err; ?></span>
                     </div>
                     <div class="form-group">
-                        <label>temps</label>
+                        <label>Temps</label>
                         <input type="time" name="temps" class="form-control" value="<?php echo $temps; ?>">
                         <span class="form-text"><?php echo $temps_err; ?></span>
                     </div>
 
-                    <input type="submit" class="btn btn-primary" value="Submit">
-                    <a href="enseignant_soutenance-index.php" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" class="btn btn-primary" value="Envoyer">
+                    <a href="enseignant_soutenance-index.php" class="btn btn-secondary">Annuler</a>
                 </form>
             </div>
         </div>
