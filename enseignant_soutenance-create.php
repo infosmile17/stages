@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <?php
 
                             // Attempt select query execution
-                            $sql_users = "SELECT * FROM utilisateur WHERE type=2 and id NOT IN (SELECT id_enseignant FROM enseignant_soutenance)";
+                            $sql_users = "SELECT * FROM utilisateur WHERE type=2";
 
                             if ($result = mysqli_query($link, $sql_users)) {
                                 if (mysqli_num_rows($result) > 0) {

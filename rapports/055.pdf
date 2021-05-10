@@ -1,0 +1,257 @@
+<div id="matricule_form" class="bloc_blanc_border relative zoom margin_bottom10 div_contenu_etap_service padding_bottom20">
+ <h3 class="txt24 font_myriad">RDV /Centre de visite technique que vous avez choisi : Sidi Bouzid</h3>
+<div id="matricule_form" class="bloc_blanc_border relative zoom margin_bottom10 div_contenu_etap_service padding_bottom20">
+
+  <h2 class="txt24 font_myriad"> RDV/ Choisissez votre rendez-vous en cliquant sur la case horaire qui vous convient</h2>
+<p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><table class="tbl-qa" align="center">
+
+   <thead class="blue-grey lighten-4">
+  
+	  <tr><th class="bloc_blanc_border relative zoom margin_bottom10 div_contenu_etap_service padding_bottom20" width="20%">Date visite</th>
+	  
+	  <th class="bloc_blanc_border relative zoom margin_bottom10 div_contenu_etap_service padding_bottom20" width="5%">Disponibilité</th>
+	</tr>
+  </thead>
+  
+  <tbody id="table-body">
+		  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">08:45:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087427">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">09:00:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087553">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">09:15:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087437">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">09:30:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087443">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">09:45:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087447">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">10:00:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087452">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">10:15:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087458">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">10:30:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087463">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">10:45:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087468">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">11:00:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087473">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">11:15:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087477">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">11:30:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087482">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">11:45:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087487">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">12:00:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087493">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">12:15:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087498">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">12:30:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087503">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">12:45:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087507">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">13:00:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087512">
+	 
+
+	 </p></td></tr>
+    	  <tr class="table-row">
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">2021-05-05</p></td>
+		
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center">13:15:00</p></td>
+		<td> <p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" align="center"><input type="radio" colspan="2" class="radio_service" name="nom" id="ssp" value="6087518">
+	 
+
+	 </p></td></tr>
+      </tbody>
+  
+</table>
+ </div>
+
+								
+								 
+								 
+								
+																	 <br>
+									 									 
+                       
+                        <img src="fr/image/gif/px.gif" alt="">
+                        <img src="fr/image/gif/px.gif" alt="">
+                        <img src="fr/image/gif/px.gif" alt=" ">
+                      
+                      
+     
+	 
+	 
+	 
+	 
+		
+                    <div id="matricule_form" class="bloc_blanc_border relative zoom margin_bottom10 div_contenu_etap_service padding_bottom20">
+                                
+                                <table border="0" cellspacing="0" cellpadding="0" class="txt11" width="100%">
+                                    
+                                   <tbody><tr class="tr_bleu">
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#000000">Votre N° d'Immatriculation : </p></td>
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" width="20%">1798TU123</p></td>
+                                    </tr>
+                                    
+                                    <tr class="tr_bleu">
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#000000">Marque : </p></td>
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" width="20%">FORD</p></td>
+                                    </tr>
+                                    
+									<tr>
+																
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#000000">Châssis : </p></td>
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" width="20%">MNCB**********171</p></td>
+                                    </tr>
+                                    <tr class="tr_bleu">
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#000000">Droit de Réservation en ligne: </p></td>
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" width="20%">0 DT</p></td>
+                                    </tr>
+									 <tr class="tr_bleu">
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#000000">Tarif de la visite technique :</p></td>
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" width="20%">0DT</p></td>
+                                    </tr>
+									<tr class="tr_bleu">
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#000000">Total du paiement en ligne: </p></td>
+                                        <td><p class="padding_bottom20 padding_right25 padding_5" style="color:#666666" width="5%">0DT</p></td>
+                                    </tr>
+                                </tbody></table>
+                    </div>
+					 
+					<div id="matricule_form" class="bloc_blanc_border relative zoom margin_bottom10 div_contenu_etap_service padding_bottom20">
+                        <label>Validez la réservation Gratuite :</label>
+                      
+                      
+                        <img src="fr/image/gif/px.gif" alt="">
+                        <img src="fr/image/gif/px.gif" alt="">
+                        <img src="fr/image/gif/px.gif" alt=" ">
+                      
+                       
+                                            
+                       
+                      	<input name="mode" type="radio" class="radio_service" value="SMTzz" style="visibility:hidden;display:none">
+                      
+                      
+						
+                      	<input name="mode" type="radio" value="edinar">
+                      
+                      
+					      <br>
+						   <br>
+						   
+						   
+				   
+						   
+						 
+
+		  </div>
+		                          <div class="clear"><img src="fr/image/gif/px.gif" alt=""></div>
+					  
+          <div class="align_right"> <a class="button" href="#" onclick="verifForm()"> Valider </a></div>
+          
+          </div>

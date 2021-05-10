@@ -5,6 +5,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
     // Include config file
     require_once "config.php";
     require_once "helpers.php";
+    require_once "function.php";
 
     // Prepare a select statement
     $sql = "SELECT * FROM rapport WHERE id = ?";
@@ -37,7 +38,7 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
             echo "Oops! Something went wrong. Please try again later.<br>" . $stmt->error;
         }
     }
-
+    $nomm = getEtudiantName($link, $row['id_etudiant']);
     // Close statement
     mysqli_stmt_close($stmt);
 
@@ -68,23 +69,23 @@ if (isset($_GET["id"]) && !empty($_GET["id"])) {
                     </div>
 
                     <div class="form-group">
-                        <label>id_etudiant</label>
-                        <p class="form-control-static"><?php echo $row["id_etudiant"]; ?></p>
+                        <label>Etudiant</label>
+                        <p class="form-control-static"><?php echo $nomm; ?></p>
                     </div>
                     <div class="form-group">
-                        <label>titre</label>
+                        <label>Titre</label>
                         <p class="form-control-static"><?php echo $row["titre"]; ?></p>
                     </div>
                     <div class="form-group">
-                        <label>nom_pdf</label>
-                        <p class="form-control-static"><?php echo $row["nom_pdf"]; ?></p>
+                        <label>Lien PDF</label>
+                        <p class="form-control-static"><a href="/stages_/stages/rapports/<?php echo $row['nom_pdf']; ?>"><?php echo $row['nom_pdf']; ?></a></p>
                     </div>
                     <div class="form-group">
-                        <label>date</label>
+                        <label>Date</label>
                         <p class="form-control-static"><?php echo $row["date"]; ?></p>
                     </div>
 
-                    <p><a href="rapport-index.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="rapport-index.php" class="btn btn-primary">Listes des rapports</a></p>
                 </div>
             </div>
         </div>

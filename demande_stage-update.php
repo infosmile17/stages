@@ -54,7 +54,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
 
     if ($FileType == "pdf") {
         if (move_uploaded_file($_FILES['nom_pdf']['tmp_name'], $newname)) {
-            if (!$stmt->execute([$filename, $date_reponse, $etat, $id])) {
+            if (!$stmt->execute([$filename, $date_reponse, 1, $id])) {
                 echo "Something went wrong. Please try again later.";
                 header("location: error.php");
             } else {

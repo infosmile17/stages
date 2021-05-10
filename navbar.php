@@ -21,14 +21,17 @@
                 <li class="nav-item">
                     <a href="etudiant_soutenance-index.php" role="button">Etudiant soutenance</a>
                 </li>
-
+                <?php if ($_SESSION['users']['type'] == 3) { ?>
+                    <li class="nav-item">
+                        <a href="etudiant-index.php" role="button">Etudiant</a>
+                    </li>
+            <?php }
+            } ?>
+            <?php if ($_SESSION['users']['type'] != 1) { ?>
                 <li class="nav-item">
-                    <a href="etudiant-index.php" role="button">Etudiant</a>
+                    <a href="enseignant_soutenance-index.php" role="button">Enseignant soutenance</a>
                 </li>
             <?php } ?>
-            <li class="nav-item">
-                <a href="enseignant_soutenance-index.php" role="button">Enseignant soutenance</a>
-            </li>
             <li class="nav-item">
                 <a href="rapport-index.php" role="button">Rapports</a>
             </li>

@@ -9,7 +9,7 @@ require_once "function.php";
 // Define variables and initialize with empty values
 $titre = "";
 $date = "";
-$public = 0;
+$public = '0';
 
 $id_etudiant_err = "";
 $titre_err = "";
@@ -43,19 +43,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $FileType = pathinfo($newname, PATHINFO_EXTENSION);
 
     $vars = parse_columns('rapport', $_POST);
-    $stmt = $pdo->prepare("INSERT INTO rapport (titre,nom_pdf,date,public) VALUES (?,?,?,?)");
+    $id_etudiant = $_SESSION['users']['id'];
 
+    $sqll = "INSERT INTO rapport (id_etudiant,titre,nom_pdf,date,public) VALUES (" . $id_etudiant . ", '" . $titre . "', '" . $filename . "', '" . $date . "', '" . $public . "')";
+    $stmt = $pdo->prepare($sqll);
 
+    // INSERT INTO rapport (id_etudiant,titre,nom_pdf,date,public) VALUES (28,'zefzef','RS.pdf','2021-05-11','0')
     $FileType = pathinfo($newname, PATHINFO_EXTENSION);
-
     if ($FileType == "pdf") {
         if (move_uploaded_file($_FILES['nom_pdf']['tmp_name'], $newname)) {
-            if (!$stmt->execute([$titre, $filename, $date, $public])) {
-                echo "Something went wrong. Please try again later.";
-                header("location: error.php");
-            } else {
+            // var_dump([$id_etudiant, $titre, $filename, $date, $public]);
+            if ($stmt->execute()) {
                 $stmt = null;
-                header("location: demande_stage-read.php?id=$id");
+                header("location: rapport-index.php");
             }
         } else {
 
@@ -78,24 +78,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <form enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     <div class="form-group">
                         <label>Titre</label>
-                        <input type="text" name="titre" maxlength="250" class="form-control" value="<?php echo $titre; ?>">
+                        <input type="text" required name="titre" maxlength="250" class="form-control" value="<?php echo $titre; ?>">
                         <span class="form-text"><?php echo $titre_err; ?></span>
                     </div>
                     <div class="form-group">
                         <label>Rapport (pdf)</label>
-                        <input type="file" name="nom_pdf" maxlength="250" class="form-control" value="<?php echo ''; ?>">
+                        <input type="file" required name="nom_pdf" maxlength="250" class="form-control" value="<?php echo ''; ?>">
                         <span class="form-text"><?php echo $nom_pdf_err; ?></span>
                     </div>
                     <div class="form-group">
                         <label>Date</label>
-                        <input type="date" name="date" class="form-control" value="<?php echo $date; ?>">
+                        <input type="date" required name="date" class="form-control" value="<?php echo $date; ?>">
                         <span class="form-text"><?php echo $date_err; ?></span>
                     </div>
                     <div class="form-group">
                         <label>Visibilité</label><br>
-                        <input type="radio" id="prive" name="public" value="prive">
+                        <input type="radio" id="prive" name="public" value="0" checked>
                         <label for="prive">Privé</label><br>
-                        <input type="radio" id="public" name="public" value="public">
+                        <input type="radio" id="public" name="public" value="1">
                         <label for="public">Public</label><br>
 
 

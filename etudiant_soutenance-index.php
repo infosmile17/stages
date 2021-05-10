@@ -9,7 +9,7 @@ include_once('function.php');
             <div class="col-md-12">
                 <div class="page-header clearfix">
                     <h2 class="float-left">Les dates des soutenances pour les etudiants</h2>
-                    <?php if (isset($_SESSION['users']['type']) == 3) { ?>
+                    <?php if ($_SESSION['users']['type'] == 3) { ?>
                         <a href="etudiant_soutenance-create.php" class="btn btn-success float-right">Ajouter un nouvel enregistrement</a>
                     <?php } ?>
                     <a href="etudiant_soutenance-index.php" class="btn btn-info float-right mr-2">Réinitialiser la vue</a>
@@ -117,7 +117,7 @@ include_once('function.php');
                             echo "<td>" . $row['temps'] . "</td>";
                             echo "<td>";
                             echo "<a href='etudiant_soutenance-read.php?id=" . $row['id'] . "' title='Afficher enregistrement' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                            if (isset($_SESSION['users']['type']) == 3) {
+                            if ($_SESSION['users']['type'] == 3) {
                                 echo "<a href='etudiant_soutenance-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
                                 echo "<a href='etudiant_soutenance-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
                             }

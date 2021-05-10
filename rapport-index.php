@@ -71,9 +71,13 @@ include_once('function.php');
                 }
 
                 // Attempt select query execution
-                $sql = "SELECT * FROM rapport ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
-                $count_pages = "SELECT * FROM rapport";
-
+                if ($_SESSION['users']['type'] == 3) {
+                    $sql = "SELECT * FROM rapport ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    $count_pages = "SELECT * FROM rapport";
+                } else {
+                    $sql = "SELECT * FROM rapport WHERE (id_etudiant=" . $_SESSION['users']['id'] . " and public ='1') OR public ='0' ORDER BY $order $sort LIMIT $offset, $no_of_records_per_page";
+                    $count_pages = "SELECT * FROM rapport  WHERE (id_etudiant=" . $_SESSION['users']['id'] . " and public ='1') OR public ='0' ";
+                }
 
                 if (!empty($_GET['search'])) {
                     $search = ($_GET['search']);
@@ -101,10 +105,10 @@ include_once('function.php');
                         echo "<table class='table table-bordered table-striped'>";
                         echo "<thead>";
                         echo "<tr>";
-                        echo "<th><a href=?search=$search&sort=&order=id_etudiant&sort=$sort>id_etudiant</th>";
-                        echo "<th><a href=?search=$search&sort=&order=titre&sort=$sort>titre</th>";
-                        echo "<th><a href=?search=$search&sort=&order=nom_pdf&sort=$sort>nom_pdf</th>";
-                        echo "<th><a href=?search=$search&sort=&order=date&sort=$sort>date</th>";
+                        echo "<th><a href=?search=$search&sort=&order=id_etudiant&sort=$sort>Etudiant</th>";
+                        echo "<th><a href=?search=$search&sort=&order=titre&sort=$sort>Titre</th>";
+                        echo "<th><a href=?search=$search&sort=&order=nom_pdf&sort=$sort>Lien PDF</th>";
+                        echo "<th><a href=?search=$search&sort=&order=date&sort=$sort>Date</th>";
 
                         echo "<th>Action</th>";
                         echo "</tr>";
@@ -112,14 +116,16 @@ include_once('function.php');
                         echo "<tbody>";
                         while ($row = mysqli_fetch_array($result)) {
                             echo "<tr>";
-                            echo "<td>" . $row['id_etudiant'] . "</td>";
+                            echo "<td>" . getEtudiantName($link, $row['id_etudiant']) . "</td>";
                             echo "<td>" . $row['titre'] . "</td>";
-                            echo "<td>" . $row['nom_pdf'] . "</td>";
+                            echo "<td><a href='/stages_/stages/rapports/" . $row['nom_pdf'] . "'>" . $row['nom_pdf'] . "</a></td>";
                             echo "<td>" . $row['date'] . "</td>";
                             echo "<td>";
                             echo "<a href='rapport-read.php?id=" . $row['id'] . "' title='Afficher enregistrement' data-toggle='tooltip'><i class='far fa-eye'></i></a>";
-                            echo "<a href='rapport-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
-                            echo "<a href='rapport-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                            if ($_SESSION['users']['type'] == 3) {
+                                // echo "<a href='rapport-update.php?id=" . $row['id'] . "' title='Mettre à jour enregistrement' data-toggle='tooltip'><i class='far fa-edit'></i></a>";
+                                echo "<a href='rapport-delete.php?id=" . $row['id'] . "' title='Supprimer enregistrement' data-toggle='tooltip'><i class='far fa-trash-alt'></i></a>";
+                            }
                             echo "</td>";
                             echo "</tr>";
                         }
